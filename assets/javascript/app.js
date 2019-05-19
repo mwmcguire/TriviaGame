@@ -20,6 +20,25 @@ let questions = [
 
 console.log(questions);
 
+
+// Timer
+var maxTime = 60;
+var intervalId;
+var timer = $("<h3>");
+timer.attr("id", "timer");
+
+function startTimer() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+}
+
+function decrement() {
+    maxTime--;
+    timer.text("Time Remaining: " + maxTime);
+    $("#quiz").prepend(timer);
+}
+
+
 // On page load... display Start button
 $(document).ready(function() {
     var startButton = $("<button>");
@@ -27,44 +46,33 @@ $(document).ready(function() {
     startButton.text("Start Quiz");
     quizContainer.append(startButton);
 
+
 // Button click to start the game
 startButton.click(function() {
     quizContainer.empty();
 
+    // Time ticks down to answer questions
+    startTimer();
+
     // Generate questions...
-    var table = $("<table/>").addClass("tbl");
     for (var i = 0; i < questions.length; i++) {
-        var row1 = $("<tr/>").addClass("q-row").text(questions[i].ask);
-        table.append(row1);
+        var questionDiv = $("<div>");
+        questionDiv.text(questions[i].ask);
+        quizContainer.append(questionDiv);
+
+        // and answers...
+       // quizContainer.append(questions[i].choices);
         }
     
+    
+    // Display submit button
+    var submitButton = $("<button>");
+    submitButton.attr("id", "submit-btn");
+    submitButton.text("Submit");
+    quizContainer.append(submitButton);
     });
 
-    quizContainer.append(table);
-    
-    var form = $("<form/>", 
-            {action:"/myaction" }
-        );
-    form.append( 
-        $("<input>", 
-            { type:"radio",  
-            name:"a", 
-            value: "a" }
-        )
-    );
-
-
-    quizContainer.append(form);
-
 });
-
-    // When button is pressed, display questions
-
-
-    // Time ticks down to answer questions
-
-
-    // Display submit button
 
 
 // When submit button is clicked...
@@ -72,4 +80,5 @@ var correct = 0;
 var incorrect = 0;
 var incomplete = 0;
 
+   
     // Display correct answers, incorrect answers, and unanswered

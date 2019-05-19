@@ -13,6 +13,7 @@ header h1{
 
 #quiz {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: black 2px solid;
@@ -25,4 +26,10 @@ header h1{
 #start-btn {
     width: 200px;
     height: 75px;
+}
+
+#timer {
+    border: black 2px solid;
+    padding: 10px;
+
 }
