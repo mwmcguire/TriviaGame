@@ -1,0 +1,28 @@
+body 
+    { 
+    font: 14px/1.5  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; 
+    background: url(../images/micro_carbon.png) repeat; 
+    color: #000000;     
+    text-align:center; 
+} 
+
+header h1{
+    text-align: center;
+    color: white;
+}
+
+#quiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black 2px solid;
+    height: 40em;
+    width: 75%;
+    margin: 0 auto;
+    background: white;
+}
+
+#start-btn {
+    width: 200px;
+    height: 75px;
+}
