@@ -20,6 +20,13 @@ let questions = [
 
 console.log(questions);
 
+function createChoices() {
+    var choiceBtn = $("<input type='radio' name='rbtnCount' />");
+    return choiceBtn;
+}
+
+
+// ==========================================================================
 
 // Timer
 var maxTime = 60;
@@ -38,6 +45,7 @@ function decrement() {
     $("#quiz").prepend(timer);
 }
 
+// ==========================================================================
 
 // On page load... display Start button
 $(document).ready(function() {
@@ -55,14 +63,18 @@ startButton.click(function() {
     startTimer();
 
     // Generate questions...
+    var questionTable = $("<table>").addClass("q-tbl");
     for (var i = 0; i < questions.length; i++) {
-        var questionDiv = $("<div>");
-        questionDiv.text(questions[i].ask);
-        quizContainer.append(questionDiv);
+        var questionRow = $("<tr>").addClass("q-row").text(questions[i].ask);
+        questionTable.append(questionRow);
 
-        // and answers...
-       // quizContainer.append(questions[i].choices);
+        // and answer choices...
+        var choicesRow = $("<tr>").addClass("c-row");
+        (questions[i].choices).map(createChoices);
+        questionTable.append(choicesRow);
         }
+
+    quizContainer.append(questionTable);
     
     
     // Display submit button
@@ -76,9 +88,10 @@ startButton.click(function() {
 
 
 // When submit button is clicked...
+// Display number of correct answers, incorrect answers, and unanswered
+
 var correct = 0;
 var incorrect = 0;
 var incomplete = 0;
 
    
-    // Display correct answers, incorrect answers, and unanswered
