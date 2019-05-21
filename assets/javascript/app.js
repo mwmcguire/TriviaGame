@@ -29,13 +29,12 @@ function createChoices() {
 // ==========================================================================
 
 // Timer
-var maxTime = 60;
+var maxTime = 30;
 var intervalId;
 var timer = $("<h3>");
 timer.attr("id", "timer");
 
 function startTimer() {
-    clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
 }
 
@@ -43,7 +42,21 @@ function decrement() {
     maxTime--;
     timer.text("Time Remaining: " + maxTime);
     $("#quiz").prepend(timer);
+    if (maxTime === 0) {
+        displayResults();
+    }
 }
+
+// Function to display results
+var correct = 0;
+var incorrect = 0;
+var unanswered = 0;
+
+function displayResults() {
+    clearInterval(intervalId);
+    $("#quiz").html("<ul><li>Correct: " + correct + "</li><li>Incorrect: " + incorrect + "</li><li>Unanswered: " + unanswered + "</li></ul>");
+}
+
 
 // ==========================================================================
 
@@ -56,42 +69,39 @@ $(document).ready(function() {
 
 
 // Button click to start the game
-startButton.click(function() {
-    quizContainer.empty();
+    startButton.click(function() {
+        quizContainer.empty();
 
-    // Time ticks down to answer questions
-    startTimer();
+        // Time ticks down to answer questions
+        startTimer();
 
-    // Generate questions...
-    var questionTable = $("<table>").addClass("q-tbl");
-    for (var i = 0; i < questions.length; i++) {
-        var questionRow = $("<tr>").addClass("q-row").text(questions[i].ask);
-        questionTable.append(questionRow);
+        // Generate questions...
+        var questionTable = $("<table>").addClass("q-tbl");
+        for (var i = 0; i < questions.length; i++) {
+            var questionRow = $("<tr>").addClass("q-row").text(questions[i].ask);
+            questionTable.append(questionRow);
 
-        // and answer choices...
-        var choicesRow = $("<tr>").addClass("c-row");
-        (questions[i].choices).map(createChoices);
-        questionTable.append(choicesRow);
-        }
+            // and answer choices...
+            var choicesRow = $("<tr>").addClass("c-row");
+            (questions[i].choices).map(createChoices);
+            questionTable.append(choicesRow);
+            }
 
-    quizContainer.append(questionTable);
+        quizContainer.append(questionTable);
+        
+        
+        // Display submit button
+        var submitButton = $("<button>");
+        submitButton.attr("id", "submit-btn");
+        submitButton.text("Submit");
+        quizContainer.append(submitButton);
     
-    
-    // Display submit button
-    var submitButton = $("<button>");
-    submitButton.attr("id", "submit-btn");
-    submitButton.text("Submit");
-    quizContainer.append(submitButton);
+        // When submit button is clicked...
+        // Display number of correct answers, incorrect answers, and unanswered
+        submitButton.click(function() {
+            displayResults();
+        });
+
     });
 
-});
-
-
-// When submit button is clicked...
-// Display number of correct answers, incorrect answers, and unanswered
-
-var correct = 0;
-var incorrect = 0;
-var incomplete = 0;
-
-   
+}); 
