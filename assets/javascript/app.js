@@ -20,11 +20,18 @@ let questions = [
 
 console.log(questions);
 
-function createChoices() {
-    var choiceBtn = $("<input type='radio' name='rbtnCount' />");
-    return choiceBtn;
-}
+function createChoices(choice) {
+    var choiceBtn = $(" <input />")
+            .attr({
+                type: 'radio',
+                name: 'rbtnCount',
+                class: 'button'
+            });
+    var choiceLabel = $('<label>').text(choice);
 
+    
+    return $('<div>').append(choiceLabel, choiceBtn);
+}
 
 // ==========================================================================
 
@@ -83,8 +90,8 @@ $(document).ready(function() {
 
             // and answer choices...
             var choicesRow = $("<tr>").addClass("c-row");
-            (questions[i].choices).map(createChoices);
-            questionTable.append(choicesRow);
+            var choicebuttons = questions[i].choices.map(createChoices);
+            questionTable.append(choicebuttons);
             }
 
         quizContainer.append(questionTable);
