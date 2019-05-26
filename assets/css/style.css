@@ -9,6 +9,8 @@ body
 header h1{
     text-align: center;
     color: white;
+    font-size: 24px;
+    padding-top: 20px;
 }
 
 #quiz {
@@ -31,5 +33,19 @@ header h1{
 #timer {
     border: black 2px solid;
     padding: 10px;
+    margin-bottom: 30px;
 
+}
+
+.c-row div{
+    display: inline-block;
+    padding: 5px;
+}
+
+.c-row {
+    height: 60px;
+}
+
+.q-row { 
+    height: 20px;
 }

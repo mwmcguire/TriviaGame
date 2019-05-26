@@ -90,12 +90,13 @@ $(document).ready(function() {
 
             // and answer choices...
             var choicesRow = $("<tr>").addClass("c-row");
-            var choicebuttons = questions[i].choices.map(createChoices);
-            questionTable.append(choicebuttons);
+            var choiceButtons = questions[i].choices.map(createChoices);
+            choicesRow.append(choiceButtons);
+            questionTable.append(choicesRow);
             }
 
         quizContainer.append(questionTable);
-        
+
         
         // Display submit button
         var submitButton = $("<button>");
@@ -106,6 +107,12 @@ $(document).ready(function() {
         // When submit button is clicked...
         // Display number of correct answers, incorrect answers, and unanswered
         submitButton.click(function() {
+            // If user selects correct answer, correct ++
+            if (choice === questions.answer) {
+                correct++;
+            } else {
+                incorrect++;
+            }
             displayResults();
         });
 
