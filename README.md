@@ -1,17 +1,17 @@
 # TriviaGame
 
-###### UNC Coding Bootcamp - Assignment 5
+### UNC Coding Bootcamp - Assignment 5
 
 Trivia game using JavaScript for logic and JQuery to manipulate HTML.
 
 
-## Bugs:
+### Bugs:
 
 * Buttons not holding on to selection correctly
 * Results not incrementing correctly
 
 
-## Built With:
+### Built With:
 
 * HTML5
 * CSS3
