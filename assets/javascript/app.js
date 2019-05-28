@@ -90,8 +90,10 @@ $(document).ready(function() {
 
             // and answer choices...
             var choicesRow = $("<tr>").addClass("c-row");
+            var buttonGroup = $("<fieldset>");
             var choiceButtons = questions[i].choices.map(createChoices);
-            choicesRow.append(choiceButtons);
+            buttonGroup.append(choiceButtons);
+            choicesRow.append(buttonGroup);
             questionTable.append(choicesRow);
             }
 
@@ -107,7 +109,9 @@ $(document).ready(function() {
         // When submit button is clicked...
         // Display number of correct answers, incorrect answers, and unanswered
         submitButton.click(function() {
-            // If user selects correct answer, correct ++
+            // If user selects correct answer, correct++
+            // If user selects incorrect answer, incorrect++
+            // If user doesn't choose an answer, unanswered++
             if (choice === questions.answer) {
                 correct++;
             } else {
